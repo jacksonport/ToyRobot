@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <string>
 
 enum class EHeading : std::uint8_t
 {
@@ -29,6 +30,8 @@ public:
     virtual bool PlaceRobot( std::uint8_t X_coord, std::uint8_t Y_coord, EHeading heading ) noexcept = 0;
 
     virtual bool ExecCommand( ECommand command ) noexcept = 0;
+
+    virtual bool ExtractResult( std::string* pLine ) noexcept = 0;
 };
 
 typedef std::shared_ptr < IBoardModel > SpBoardModel_t;

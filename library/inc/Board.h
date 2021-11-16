@@ -19,9 +19,14 @@ public:
 
     CSquareBoard( std::uint8_t X_dimension = 5, std::uint8_t Y_dimension = 5 );
 
+    // Constructor delegating
+    CSquareBoard( const SPosition& position );
+
     bool PlaceRobot( std::uint8_t X_coord, std::uint8_t Y_coord, EHeading heading ) noexcept override;
     
     bool ExecCommand( ECommand command ) noexcept override;
+
+    bool ExtractResult( std::string* pLine ) noexcept override;
 
 private:
 
@@ -30,4 +35,6 @@ private:
     const std::uint8_t m_YDimension;
 
     SBoardPosition m_stRobotPosition;
+
+    std::string m_strLastCommandResult;
 };
