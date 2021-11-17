@@ -2,6 +2,9 @@
 
 #include "IBoardModel.h"
 
+bool HeadingToString( ECommand cmd, std::string* pCmd );
+bool StringToHeading( const std::string& Cmd, ECommand* pCmd );
+
 struct SPosition
 {
     std::uint8_t m_X;
@@ -37,4 +40,6 @@ private:
     SBoardPosition m_stRobotPosition;
 
     std::string m_strLastCommandResult;
+
+    bool m_bPlaced;
 };
