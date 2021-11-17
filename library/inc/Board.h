@@ -2,8 +2,8 @@
 
 #include "IBoardModel.h"
 
-bool HeadingToString( ECommand cmd, std::string* pCmd );
-bool StringToHeading( const std::string& Cmd, ECommand* pCmd );
+bool HeadingToString( EHeading cmd, std::string* pCmd );
+bool StringToHeading( const std::string& Cmd, EHeading* pCmd );
 
 struct SPosition
 {

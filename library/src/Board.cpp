@@ -9,7 +9,7 @@ using namespace std;
 namespace
 {
 
-// Mapping of actions strings into enumerations
+// Mapping of headings strings into enumerations
 const string cstrNORTH = "NORTH";
 const string cstrEAST = "EAST";
 const string cstrSOUTH = "SOUTH";
