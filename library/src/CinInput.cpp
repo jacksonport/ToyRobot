@@ -1,8 +1,10 @@
 
+#include <limits>
 #include <iostream>
 #include <regex>
 
 #include "CinInput.h"
+#include "Board.h"
 
 using namespace std;
 
@@ -32,7 +34,8 @@ typedef MapStringToCmd_t::const_iterator CiMapStringToCmd_t;
 
 CiMapStringToCmd_t StrItCmdEnd = MapToCommandMapping.end();
 
-bool StringToCmd( const std::string& Cmd, ECommand* pCmd )
+// Convert string command into enumeration
+inline bool StringToCmd( const string& Cmd, ECommand* pCmd )
 {
     if ( !pCmd )
     {
@@ -80,8 +83,6 @@ bool CinInput::GetInputLine( string* pLine ) noexcept
         return false;
     }
 
-    
-
     smatch sm;
 
     // Check if we have a command
@@ -91,37 +92,49 @@ bool CinInput::GetInputLine( string* pLine ) noexcept
         {
             return false;
         }
-        
+
         ECommand eCmd;
 
-        if ( StringToCmd( sm[ 0 ], &eCmd ) )
+        if ( StringToCmd( sm[ 0 ].str(), &eCmd ) )
         {
-            m_spBoardModel -> ExecCommand( eCmd );
+            if ( m_spBoardModel -> ExecCommand( eCmd ) )
+            {
+                if ( ECommand::REPORT == eCmd )
+                {
+                    if ( !m_spBoardModel -> ExtractResult( pLine ) )
+                    {
+                        return false;
+                    }
+                }
 
-            // TODO
+                return true;
+            }
         }
-        
-
-        
     }
     else if ( regex_match( strInput, sm, m_rePlacing ) ) // Check if we have a placing
     {
+        int iX = abs( atoi( sm[ 2 ].str().c_str() ) );
+        int iY = abs( atoi( sm[ 3 ].str().c_str() ) );
 
-        /*
-        for ( auto& strng : sm )
+        // Check if we exceed maximum possible value for a board dimension
+        if ( ( iX > numeric_limits < uint8_t >::max() ) || 
+             ( iY > numeric_limits < uint8_t >::max() ) )
         {
-            cout << strng << endl;
+            return false;
         }
-        */
         
+        EHeading eHeading;
+
+        // Extract heading
+        if ( StringToHeading( sm[ 4 ].str(), &eHeading ) )
+        {
+            if ( m_spBoardModel -> PlaceRobot( 
+                static_cast < uint8_t > ( iX ), static_cast < uint8_t > ( iY ), eHeading ) )
+            {
+                return true;
+            }
+        }
     }
-    
-    
-    // TODO: read line implementation
-
-    
-
-    // TODO: process line implementation
     
     return false;
 }

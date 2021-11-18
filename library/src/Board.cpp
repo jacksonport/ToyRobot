@@ -118,7 +118,7 @@ bool CSquareBoard::ExecCommand( ECommand command ) noexcept
     {
         return false;
     }
-    
+
     m_strLastCommandResult = "";
 
     switch ( command )

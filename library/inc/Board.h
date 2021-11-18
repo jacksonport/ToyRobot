@@ -2,6 +2,8 @@
 
 #include "IBoardModel.h"
 
+#define BOARD_DIMENSION 5
+
 bool HeadingToString( EHeading cmd, std::string* pCmd );
 bool StringToHeading( const std::string& Cmd, EHeading* pCmd );
 
@@ -20,7 +22,7 @@ class CSquareBoard : public IBoardModel
 {
 public:
 
-    CSquareBoard( std::uint8_t X_dimension = 5, std::uint8_t Y_dimension = 5 );
+    CSquareBoard( std::uint8_t X_dimension = BOARD_DIMENSION, std::uint8_t Y_dimension = BOARD_DIMENSION );
 
     // Constructor delegating
     CSquareBoard( const SPosition& position );
