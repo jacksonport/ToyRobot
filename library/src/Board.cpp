@@ -186,7 +186,7 @@ bool CSquareBoard::ExecCommand( ECommand command ) noexcept
         {
             ostringstream strmOutput;
 
-            strmOutput << m_stRobotPosition.m_X << ',' << m_stRobotPosition.m_Y << ',';
+            strmOutput << to_string( m_stRobotPosition.m_X ) << ',' << to_string( m_stRobotPosition.m_Y ) << ',';
 
             if ( HeadingToString( m_stRobotPosition.m_Heading, &m_strLastCommandResult ) )
             {
@@ -286,7 +286,7 @@ bool CSquareBoard::ExtractResult( string* pLine ) noexcept
     {
         return false;
     }
-    
+
     *pLine = m_strLastCommandResult;
 
     return true;
