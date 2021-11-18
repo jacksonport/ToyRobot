@@ -22,5 +22,9 @@ include_directories(BEFORE ${CMAKE_CURRENT_LIST_DIR}/inc)
 
 export(TARGETS ${PROJECT_NAME} FILE "${PROJECT_NAME}Config.cmake")
 
+add_executable("ToyConsole" src/ToyConsole.cpp)
+
+target_link_libraries("ToyConsole" ${PROJECT_NAME})
+
 # Always build the target test
 add_subdirectory(test)

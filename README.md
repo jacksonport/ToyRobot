@@ -16,3 +16,6 @@ make
 Running the tests:
 cat ./library/test/test_input.txt | ./library/test/RobotTest --log_level=message
 
+Running console application:
+./library/ToyConsole
+
